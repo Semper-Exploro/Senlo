@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { mockPosts, mockUsers, mockAIResidents } from '../data/mock';
+import { mockPosts } from '../data/mock';
 import type { Post, User, CardStyle } from '../data/mock';
 
 interface NewPostData {

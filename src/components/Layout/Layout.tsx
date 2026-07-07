@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useStore } from '../../hooks/useStore';
-import { Compass, Users, User, LogOut } from 'lucide-react';
+import { Compass, Users, LogOut } from 'lucide-react';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();

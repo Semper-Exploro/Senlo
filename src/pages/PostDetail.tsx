@@ -25,12 +25,6 @@ export function PostDetail() {
     );
   }
 
-  const handleAddResonance = (type: string) => {
-    if (isLoggedIn) {
-      addResonance(post.id, type);
-    }
-  };
-
   const handleCommentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newComment.trim() || !isLoggedIn) return;
