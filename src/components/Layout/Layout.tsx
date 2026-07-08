@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useStore } from '../../hooks/useStore';
-import { Compass, Users, LogOut } from 'lucide-react';
+import { Compass, Users, Settings, LogOut } from 'lucide-react';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -47,6 +47,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-3">
             {isLoggedIn ? (
               <>
+                <Link
+                  to="/ai-admin"
+                  className="p-2 rounded-md text-gray-400 hover:bg-gray-50 hover:text-gray-600 transition-colors"
+                  title="AI 管理"
+                >
+                  <Settings size={16} strokeWidth={1.5} />
+                </Link>
                 <Link
                   to="/profile"
                   className="flex items-center gap-2 px-3 py-1.5 rounded-md text-sm text-gray-600 hover:bg-gray-50 transition-colors"

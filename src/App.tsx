@@ -5,6 +5,7 @@ import { Residents } from './pages/Residents';
 import { Login } from './pages/Login';
 import { Profile } from './pages/Profile';
 import { PostDetail } from './pages/PostDetail';
+import { AIAdmin } from './pages/AIAdmin';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/ai-admin" element={<AIAdmin />} />
         </Routes>
       </Layout>
     </BrowserRouter>
