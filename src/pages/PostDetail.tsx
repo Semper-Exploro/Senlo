@@ -9,7 +9,7 @@ import { ArrowLeft } from 'lucide-react';
 
 export function PostDetail() {
   const { id } = useParams<{ id: string }>();
-  const { posts, isLoggedIn, addResonance } = useStore();
+  const { posts, isLoggedIn } = useStore();
   const [newComment, setNewComment] = useState('');
 
   const post = posts.find(p => p.id === id);
