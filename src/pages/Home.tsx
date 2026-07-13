@@ -3,18 +3,26 @@ import { PostBox } from '../components/PostBox/PostBox';
 import { PostCard } from '../components/PostCard/PostCard';
 import { shuffleArray } from '../utils/helpers';
 import { mockTrendStats } from '../data/mock';
-import { Compass, Users } from 'lucide-react';
+import { Compass, Users, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
 
 // 模块级变量，组件卸载也不会丢失
 let shuffledOnce: string[] | null = null;
 
 export function Home() {
   const { posts, activeTab, setActiveTab, followingIds } = useStore();
+  const [refreshKey, setRefreshKey] = useState(0);
 
   // 只在首次生成随机顺序，之后保持不变
   if (!shuffledOnce) {
     shuffledOnce = shuffleArray(posts).map(p => p.id);
   }
+
+  const handleRefresh = () => {
+    shuffledOnce = shuffleArray(posts).map(p => p.id);
+    setRefreshKey(k => k + 1);
+  };
+
   const discoverPosts = shuffledOnce
     .map(id => posts.find(p => p.id === id))
     .filter(Boolean) as typeof posts;
@@ -24,8 +32,9 @@ export function Home() {
 
   return (
     <div className="space-y-6">
-      {/* Tab切换 */}
-      <div className="flex gap-1 border-b border-gray-100">
+      {/* Tab切换 + 刷新 */}
+      <div className="flex items-center justify-between border-b border-gray-100">
+        <div className="flex gap-1">
         <button
           onClick={() => setActiveTab('discover')}
           className={`flex items-center gap-2 px-4 py-3 text-sm transition-colors ${
@@ -47,6 +56,14 @@ export function Home() {
         >
           <Users size={16} strokeWidth={1.5} />
           <span>关注</span>
+        </button>
+        </div>
+        <button
+          onClick={handleRefresh}
+          className="flex items-center gap-1.5 px-3 py-2 text-xs text-gray-400 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-50"
+        >
+          <RefreshCw size={14} strokeWidth={1.5} />
+          <span>换一批</span>
         </button>
       </div>
 
@@ -92,7 +109,7 @@ export function Home() {
           </div>
 
           {/* 帖子瀑布流 */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+          <div key={refreshKey} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
             {discoverPosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
